@@ -3,8 +3,11 @@ hpc$Date <- as.Date(hpc$Date, "%d/%m/%Y")
 
 hpcp <- hpc[hpc$Date %in% as.Date(c("2007-02-01","2007-02-02")),]
 hpcp$Global_active_power <- as.numeric(as.character(hpcp$Global_active_power))
+#hpcp$Time <- strptime(hpcp$Time, format = "%H:%M:%S")
 
-hist(hpcp$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
+hpcp$Date1 <- strptime(paste(hpcp$Date,hpcp$Time), "%Y-%m-%d %H:%M:%S")
 
-dev.copy(png, "figure/plot1.png")
+plot(hpcp$Date1, hpcp$Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = "")
+
+dev.copy(png, "figure/plot2.png")
 dev.off()
